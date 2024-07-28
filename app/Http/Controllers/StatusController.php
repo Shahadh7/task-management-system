@@ -8,7 +8,7 @@ class StatusController extends Controller
 {
     public function index()
     {
-        $status = Status::all();
+        $statuses = Status::all();
         return response()->json([
             'message' => 'Statuses retrieved successfully',
             'data' => $statuses
@@ -48,7 +48,7 @@ class StatusController extends Controller
         $status->delete();
         return response()->json([
             'message' => 'Status deleted successfully'
-        ], 204);
+        ]);
     }
 
 }
