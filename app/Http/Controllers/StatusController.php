@@ -9,7 +9,10 @@ class StatusController extends Controller
     public function index()
     {
         $status = Status::all();
-        return response()->json($status);
+        return response()->json([
+            'message' => 'Statuses retrieved successfully',
+            'data' => $statuses
+        ]);
     }
 
     public function store(Request $request)
@@ -19,7 +22,10 @@ class StatusController extends Controller
         ]);
 
         $status = Status::create($request->all());
-        return response()->json($status,201);
+        return response()->json([
+            'message' => 'Status created successfully',
+            'data' => $status
+        ], 201);
     }
 
     public function update(Request $request,$id)
@@ -28,16 +34,21 @@ class StatusController extends Controller
             'title' => 'required|string',
         ]);
 
-        $status = Status::findOrfile($id);
+        $status = Status::findOrfail($id);
         $status->update($request->all());
-        return response()->json($status);
+        return response()->json([
+            'message' => 'Status updated successfully',
+            'data' => $status
+        ]);
     }
 
     public function destroy($id)
     {
-        $status = Status::findOrfile($id);
+        $status = Status::findOrfail($id);
         $status->delete();
-        return response()->json(null,204);
+        return response()->json([
+            'message' => 'Status deleted successfully'
+        ], 204);
     }
 
 }
