@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\StatusController;
 
 
@@ -17,14 +18,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/statuses/{id}',[StatusController::class,'destroy']);
 });
 
-
-
-
-
-
-
-
-
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/priorities', [PriorityController::class, 'index']);
+    Route::get('/priorities', [PriorityController::class, 'store']);
+    Route::post('/priorities/{id}', [PriorityController::class, 'show']);
+    Route::put('/priorities/{id}', [PriorityController::class, 'update']);
+    Route::delete('/priorities/{id}', [PriorityController::class, 'destroy']);
+});
 
 
